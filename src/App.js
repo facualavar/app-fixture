@@ -1,6 +1,4 @@
 import Box from "./components/Box/Box";
-import Logo from "./components/Logo/Logo";
-import Navbar from "./components/Navbar.js/Navbar";
 import Groups from "./sections/Groups/Groups";
 
 const App = () => {
