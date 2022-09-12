@@ -1,15 +1,18 @@
 import Box from "../../../components/Box/Box"
 import './group-thumbnail.css'
 
-const GroupThumbnail = () => {
+const GroupThumbnail = ({name, teams}) => {
     return (
         <Box className="group-thumbnail">
-            <h3>Grupo A</h3>
+            <h3>{name}</h3>
             <ul>
-                <li><img src="https://flagcdn.com/w20/qa.webp"/> Equipo 1</li>
-                <li><img src="https://flagcdn.com/w20/ec.webp"/> Equipo 2</li>
-                <li><img src="https://flagcdn.com/w20/nl.webp"/> Equipo 3</li>
-                <li><img src="https://flagcdn.com/w20/sn.webp"/> Equipo 4</li>
+                {teams.map((team, index) =>
+                <li key={index}>
+                    <Box display="flex" margin="auto">
+                        <Box><img src={team.icon}/></Box>&nbsp;
+                        <Box><span>{team.name}</span></Box>
+                    </Box>
+                </li>)}
             </ul>
         </Box>
     )
