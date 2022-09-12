@@ -1,0 +1,22 @@
+
+.group-thumbnail {
+    padding: 10px;
+}
+
+.group-thumbnail h3 {
+    background-color: #fff;
+    border-radius: 5px;
+    color: #640F21;
+    font-weight: 700;
+    text-align: center;
+}
+
+.group-thumbnail ul {
+    list-style: none;
+}
+.group-thumbnail ul li {
+    color: #fff;
+    font-weight: 700;
+    padding: 5px;
+    text-align: center;
+}
