@@ -1,0 +1,16 @@
+.games {
+    margin: auto;
+    width: 30%;
+}
+
+@media screen and (max-width: 991px) {
+    .games {
+        width: 100%;
+    }
+}
+
+.title {
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+}

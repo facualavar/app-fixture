@@ -1,0 +1,27 @@
+.game {
+    display: grid;
+    color: #fff;
+    font-weight: 700;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 6fr 3fr 2fr 3fr 1fr 6fr;
+    grid-template-areas: "a b c d e f g";
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 991px) {
+    .groups {
+        width: 100%;
+    }
+}
+
+.game .vs {
+    text-align: center;
+}
+
+.game input {
+    font-size: 1.2rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    width: 50px;
+}
