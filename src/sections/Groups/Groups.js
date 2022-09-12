@@ -2,7 +2,9 @@ import Box from "../../components/Box/Box"
 import GroupThumbnail from "./GroupThumbnail/GroupThumbnail"
 import "./groups.css"
 import { useEffect, useState } from "react"
-import { getGroups } from "../../services/group-service"
+import { fetchGroups } from "../../services/group-service"
+import { Link } from "react-router-dom"
+import Alert from "../../components/Alert/Alert"
 
 const Groups = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -12,11 +14,11 @@ const Groups = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetchGroups()
+        getGroups()
     }, [])
 
-    const fetchGroups = async () => {
-        let {data, error} = await getGroups()
+    const getGroups = async () => {
+        let {data, error} = await fetchGroups()
 
         error ? setError(error) : setGroups(data)
         setIsLoading(false)
@@ -25,9 +27,12 @@ const Groups = () => {
     return (
         <Box className="groups">
             {
-                isLoading ? <Box>Cargando ...</Box>:
-                error ? <Box>Error</Box> :
-                groups.map((group, index) => <GroupThumbnail key={index} name={group.name} teams={group.teams} />)
+                isLoading ? <Alert color="yellow">Cargando ...</Alert>:
+                error ? <Alert color="red">Error</Alert> :
+                groups.map((group, index) => 
+                <Link key={index} to={`/groups/${group.id}`} className="link">
+                    <GroupThumbnail name={group.name} teams={group.teams} />
+                </Link>)
             }
         </Box>
     )

@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom"
 import Box from "../../../components/Box/Box"
+import TeamThumbnail from "../../../components/Teamthumbnail/TeamThumbnail"
 import './group-thumbnail.css'
 
 const GroupThumbnail = ({name, teams}) => {
@@ -8,10 +10,7 @@ const GroupThumbnail = ({name, teams}) => {
             <ul>
                 {teams.map((team, index) =>
                 <li key={index}>
-                    <Box display="flex" margin="auto">
-                        <Box><img src={team.icon}/></Box>&nbsp;
-                        <Box><span>{team.name}</span></Box>
-                    </Box>
+                    <TeamThumbnail flag={team.icon} name={team.name}/>
                 </li>)}
             </ul>
         </Box>

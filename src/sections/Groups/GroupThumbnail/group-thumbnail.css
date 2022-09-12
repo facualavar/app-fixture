@@ -1,6 +1,9 @@
-
 .group-thumbnail {
-    padding: 10px;
+    border-radius: 5px;
+}
+
+.group-thumbnail:hover {
+    background-color: #fff;
 }
 
 .group-thumbnail h3 {
@@ -9,6 +12,10 @@
     color: #640F21;
     font-weight: 700;
     text-align: center;
+}
+
+.group-thumbnail:hover h3 {
+    border-bottom: 1px solid #640F21;
 }
 
 .group-thumbnail ul {
@@ -20,6 +27,11 @@
     font-weight: 700;
     padding: 5px;
 }
+
+.group-thumbnail:hover ul li {
+    color: #640F21;
+}
+
 
 .group-thumbnail ul li>div {
     width: 80%;

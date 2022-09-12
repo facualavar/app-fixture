@@ -14,3 +14,7 @@
         grid-template-areas: "a b";
     }
 }
+
+.link {
+    text-decoration: none;
+}
