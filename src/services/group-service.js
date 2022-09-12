@@ -1,6 +1,6 @@
 import apiFixture from "../api/fixture"
 
-const getGroups = async () => {
+const fetchGroups = async () => {
     let data
     let error = false
 
@@ -12,4 +12,28 @@ const getGroups = async () => {
     return {data, error}
 }
 
-export {getGroups}
+const fetchGroup = async (id) => {
+    let data
+    let error = false
+
+    await apiFixture.get(`/groups/${id}`)
+        .then(
+            (response) => data = response.data,
+            (response) => error = response.response.data.message
+        )
+    return {data, error}
+}
+
+const fetchGames = async (id) => {
+    let data
+    let error = false
+
+    await apiFixture.get(`/groups/${id}/games`)
+        .then(
+            (response) => data = response.data,
+            (response) => error = response.response.data.message
+        )
+    return {data, error}
+}
+
+export {fetchGroups, fetchGroup, fetchGames}
