@@ -2,7 +2,10 @@ import styled from "styled-components"
 
 const Input = styled.input`
     width: 100%;
-    padding: 0.375rem 0.75rem;
+    height: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
     font-size: 1rem;
     text-align: start;
     color: #495057;
