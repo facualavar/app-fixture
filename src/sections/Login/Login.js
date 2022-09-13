@@ -5,7 +5,13 @@ import InputForm from "../../components/Form/InputForm/InputForm"
 import Logo from "../../components/Logo/Logo"
 
 const Login = () => {
-    const validateLogin = () => {
+    const validateLogin = (values) => {
+        const errors = {}
+
+        if(!values.email) errors.email = "es requerido"
+        if(!values.password) errors.password = "es requerido"
+
+        return errors
     }
 
     const initialValues = {
