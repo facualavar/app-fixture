@@ -35,6 +35,7 @@ const Games = ({groupId}) => {
                             <Box key={index} marginBottom="20px">
                                 {(index % 2 == 0) ? <h3 className="title">{game.matchday.name}</h3> : null}
                                 <GameThumbnail
+                                    gameNumber={index}
                                     team1Icon={game.team1.icon}
                                     team1Name={game.team1.name}
                                     team2Icon={game.team2.icon}
