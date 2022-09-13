@@ -17,11 +17,3 @@
 .game .vs {
     text-align: center;
 }
-
-.game input {
-    font-size: 1.2rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    width: 50px;
-}
