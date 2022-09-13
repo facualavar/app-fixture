@@ -36,4 +36,15 @@ const fetchGames = async (id) => {
     return {data, error}
 }
 
-export {fetchGroups, fetchGroup, fetchGames}
+const postResults = async (id, data) => {
+    let error = false
+
+    await apiFixture.post(`/groups/${id}/results`, data)
+        .then(
+            (response) => data = response.data,
+            (response) => error = response.response.data.message
+        )
+    return {data, error}
+}
+
+export {fetchGroups, fetchGroup, fetchGames, postResults}
