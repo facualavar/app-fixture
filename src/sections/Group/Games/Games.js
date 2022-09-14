@@ -1,34 +1,35 @@
-import { useEffect, useState } from "react";
-import Alert from "../../../components/Alert/Alert";
+import { useContext, useEffect, useState } from "react";
+import alertContext from "../../../contexts/alertContext";
+import GroupService from "../../../services/group-service";
 import Box from "../../../components/Box/Box";
 import GameThumbnail from "../../../components/GameThumbnail/GameThumbnail";
-import TeamThumbnail from "../../../components/Teamthumbnail/TeamThumbnail";
-import { fetchGames } from "../../../services/group-service";
 import "./games.css"
 
 const Games = ({groupId}) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const groupService = GroupService()
+    const alert = useContext(alertContext);
 
     const [games, setGames] = useState([])
 
     useEffect(() => {
-        setIsLoading(true)
+        const getGames = async () => {
+            let {data, error} = await groupService.fetchGames(groupId)
+
+            if (!error) {
+                setGames(data)
+                alert.hideAlertError()
+            } else {
+                alert.showAlertError(error)
+            }
+        }
+
         getGames()
-    }, [])
-
-    const getGames = async () => {
-        let {data, error} = await fetchGames(groupId)
-
-        error ? setError(error) : setGames(data)
-        setIsLoading(false)
-    }
+    }, [groupId])
 
     return (
         <Box padding="20px">
             {
-                isLoading ? <Alert color="yellow">Cargando ...</Alert>:
-                error ? <Alert color="red">Error</Alert> :
+                games.length ?
                 <Box className="games">
                     {games.map((game, index) => {
                         return (
@@ -45,6 +46,7 @@ const Games = ({groupId}) => {
                         )
                     })}
                 </Box>
+                : null
             }
         </Box>
     )

@@ -1,37 +1,34 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import alertContext from "../../contexts/alertContext";
+import GroupService from "../../services/group-service";
 import Box from "../../components/Box/Box";
-import Alert from "../../components/Alert/Alert";
-import { fetchGroup, postResults } from "../../services/group-service";
-import Games from "./Games/Games";
-import "./group.css"
 import Button from "../../components/Button/Button";
 import FormComponent from "../../components/Form/Form";
+import Games from "./Games/Games";
+import "./group.css"
 
 const Group = () => {
-    let { groupId } = useParams();
-
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const groupService = GroupService()
+    const alert = useContext(alertContext);
+    const { groupId } = useParams();
 
     const [group, setGroup] = useState({})
 
     useEffect(() => {
-        setIsLoading(true)
-        getGroup()
-    }, [])
+        const getGroup = async () => {
+            let {data, error} = await groupService.fetchGroup(groupId)
 
-    useEffect(() => {
-        setIsLoading(true)
+            if (!error) {
+                setGroup(data)
+                alert.hideAlertError()
+            } else {
+                alert.showAlertError(error)
+            }
+        }
+
         getGroup()
     }, [groupId])
-
-    const getGroup = async () => {
-        let {data, error} = await fetchGroup(groupId)
-
-        error ? setError(error) : setGroup(data)
-        setIsLoading(false)
-    }
 
     const initialValues = {
         goals0: "",
@@ -69,10 +66,10 @@ const Group = () => {
 
     const handleClickSaveResults = async (results) => {
         let goals = Object.values(results)
-        let {data, error} = await postResults(groupId, goals)
+        let {data, error} = await groupService.postResults(groupId, goals)
 
-        error ? setError(error) : setGroup(data)
-        setIsLoading(false)
+        // error ? setError(error) : setGroup(data)
+        // setIsLoading(false)
 
         groupId = groupId
     }
@@ -80,8 +77,7 @@ const Group = () => {
     return (
         <Box padding="20px">
             {
-                isLoading ? <Alert color="yellow">Cargando ...</Alert>:
-                error ? <Alert color="red">Error</Alert> :
+                group.id ?
                 <FormComponent
                     initialValues={initialValues}
                     validate={validateGoals}
@@ -93,6 +89,7 @@ const Group = () => {
                         <Button type="submit">Guardar Resultados</Button>
                     </Box>
                 </FormComponent>
+                : null
             }
         </Box>
     )

@@ -1,40 +1,43 @@
-import Box from "../../components/Box/Box"
-import GroupThumbnail from "./GroupThumbnail/GroupThumbnail"
-import "./groups.css"
-import { useEffect, useState } from "react"
-import { fetchGroups } from "../../services/group-service"
+import { useContext, useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
-import Alert from "../../components/Alert/Alert"
+import alertContext from "../../contexts/alertContext"
+import GroupService from "../../services/group-service"
+import GroupThumbnail from "./GroupThumbnail/GroupThumbnail"
+import Box from "../../components/Box/Box"
+import "./groups.css"
 
 const Groups = () => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const groupService = GroupService()
+    const alert = useContext(alertContext);
 
     const [groups, setGroups] = useState([])
 
     useEffect(() => {
-        setIsLoading(true)
+        const getGroups = async () => {
+            let {data, error} = await groupService.fetchGroups()
+
+            if (!error) {
+                setGroups(data)
+                alert.hideAlertError()
+            } else {
+                alert.showAlertError(error)
+            }
+        }
+
         getGroups()
     }, [])
-
-    const getGroups = async () => {
-        let {data, error} = await fetchGroups()
-
-        error ? setError(error) : setGroups(data)
-        setIsLoading(false)
-    }
 
     return (
         <Box>
             <Outlet />
             <Box className="groups">
                 {
-                    isLoading ? <Alert color="yellow">Cargando ...</Alert>:
-                    error ? <Alert color="red">Error</Alert> :
+                    groups.length ?
                     groups.map((group, index) => 
                     <Link key={index} to={`/groups/${group.id}`} className="link">
                         <GroupThumbnail name={group.name} teams={group.teams} />
                     </Link>)
+                    : null
                 }
             </Box>
         </Box>
