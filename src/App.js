@@ -15,6 +15,7 @@ const App = () => {
       <alertContext.Provider value={alertInitial}>
         <ProvideAuth>
           <Router>
+              <Nabvar />
               <AlertTop />
               <Routes />
           </Router>

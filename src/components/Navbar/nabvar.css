@@ -1,0 +1,16 @@
+.list-navbar {
+    display: flex;
+    list-style: none;
+    justify-content: end;
+}
+
+.link-navbar {
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.link-navbar:hover {
+    background-color: #640F21;
+}
