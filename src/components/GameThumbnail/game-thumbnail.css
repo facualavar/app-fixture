@@ -3,8 +3,8 @@
     color: #fff;
     font-weight: 700;
     grid-gap: 20px;
-    grid-template-columns: 1fr 6fr 3fr 2fr 3fr 1fr 6fr;
-    grid-template-areas: "a b c d e f g";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "a b c";
     margin-bottom: 10px;
 }
 

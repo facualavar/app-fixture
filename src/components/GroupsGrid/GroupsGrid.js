@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { Link } from "react-router-dom"
 import alertContext from "../../contexts/alertContext"
 import GroupService from "../../services/group-service"
-import GroupThumbnail from "./GroupThumbnail/GroupThumbnail"
-import Box from "../../components/Box/Box"
-import "./groups.css"
+import Box from "../Box/Box"
+import GroupThumbnail from "../GroupThumbnail/GroupThumbnail"
+import "./group-grid.css"
 
-const Groups = () => {
+const GroupsGrid = () => {
     const groupService = GroupService()
     const alert = useContext(alertContext);
 
@@ -28,20 +28,17 @@ const Groups = () => {
     }, [])
 
     return (
-        <Box>
-            <Outlet />
-            <Box className="groups">
-                {
-                    groups.length ?
-                    groups.map((group, index) => 
-                    <Link key={index} to={`/groups/${group.id}`} className="link">
-                        <GroupThumbnail name={group.name} teams={group.teams} />
-                    </Link>)
-                    : null
-                }
-            </Box>
+        <Box className="groups-grid">
+            {
+                groups.length ?
+                groups.map((group, index) =>
+                <Link key={index} to={`/groups/${group.id}`} className="link">
+                    <GroupThumbnail name={group.name} teams={group.teams} />
+                </Link>)
+                : null
+            }
         </Box>
     )
 }
 
-export default Groups
+export default GroupsGrid

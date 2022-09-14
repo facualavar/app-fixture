@@ -1,17 +1,17 @@
-import { Form, Formik } from "formik"
+import { Form as FormFormik, Formik } from "formik"
 
-const FormComponent = ({initialValues, validate, onSubmit, children}) => {
+const Form = ({initialValues, validate, onSubmit, children}) => {
     return (
         <Formik
             initialValues={initialValues}
             validate={validate}
             onSubmit={onSubmit}
         >
-            <Form>
+            <FormFormik>
                 {children}
-            </Form>
+            </FormFormik>
         </Formik>
     )
 }
 
-export default FormComponent
+export default Form

@@ -1,0 +1,12 @@
+.group-grid {
+    display: grid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "a b";
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+}

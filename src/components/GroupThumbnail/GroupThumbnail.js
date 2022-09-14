@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import Box from "../../../components/Box/Box"
-import TeamThumbnail from "../../../components/Teamthumbnail/TeamThumbnail"
+import Box from "../Box/Box"
+import TeamThumbnail from "../Teamthumbnail/TeamThumbnail"
 import './group-thumbnail.css'
 
 const GroupThumbnail = ({name, teams}) => {
