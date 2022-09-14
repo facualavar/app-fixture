@@ -9,7 +9,6 @@ const App = () => {
     <Box backgroundColor="#640F21" width="100vw" height="100vh">
       <Router>
           <Routes />
-          <Groups />
       </Router>
     </Box>
   )

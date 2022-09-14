@@ -3,7 +3,7 @@ import GroupThumbnail from "./GroupThumbnail/GroupThumbnail"
 import "./groups.css"
 import { useEffect, useState } from "react"
 import { fetchGroups } from "../../services/group-service"
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import Alert from "../../components/Alert/Alert"
 
 const Groups = () => {
@@ -25,15 +25,18 @@ const Groups = () => {
     }
 
     return (
-        <Box className="groups">
-            {
-                isLoading ? <Alert color="yellow">Cargando ...</Alert>:
-                error ? <Alert color="red">Error</Alert> :
-                groups.map((group, index) => 
-                <Link key={index} to={`/groups/${group.id}`} className="link">
-                    <GroupThumbnail name={group.name} teams={group.teams} />
-                </Link>)
-            }
+        <Box>
+            <Outlet />
+            <Box className="groups">
+                {
+                    isLoading ? <Alert color="yellow">Cargando ...</Alert>:
+                    error ? <Alert color="red">Error</Alert> :
+                    groups.map((group, index) => 
+                    <Link key={index} to={`/groups/${group.id}`} className="link">
+                        <GroupThumbnail name={group.name} teams={group.teams} />
+                    </Link>)
+                }
+            </Box>
         </Box>
     )
 }
