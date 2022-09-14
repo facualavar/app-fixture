@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react"
 import { login } from "../services/auth-service"
+import useStorage from "./useStorage";
 
 // Provider hook that creates auth object and handles state
 const useProvideAuth = () => {
     const [user, setUser] = useState(null)
+    const storage = useStorage()
 
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = async ({email, password}) => {
-        return await login({email, password})
+        const {data, error} = await login({email, password})
+
+        if (!error) {
+            storage.set('access_token', data.access_token)
+            setUser(data.user)
+
+            return {user, error}
+        }
+
+        return {data, error}
     }
 
     const signup = (email, password) => {
