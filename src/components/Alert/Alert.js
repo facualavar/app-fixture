@@ -42,12 +42,12 @@ const AlertStyled = styled.div`
     border: 1px solid;
     border-radius: 0.25rem;
 
-    color : ${props => colors[props.color].color};
-    border-color : ${props => colors[props.color].background};
-    background-color : ${props => colors[props.color].border};
+    color : ${props => props.color ? colors[props.color].color : ""};
+    border-color : ${props => props.color ? colors[props.color].background : ""};
+    background-color : ${props => props.color ? colors[props.color].border : ""};
 
     a {
-        color : ${props => colors[props.color].colorLink};
+        color : ${props => props.color ? colors[props.color].colorLink : ""};
         font-weight: 700;
         text-decoration: none;
 
