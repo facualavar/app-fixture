@@ -17,7 +17,7 @@ const useAlert = () => {
         setError(true)
         setMessage(messageError)
     }
-    const hideIsLoading = () => {
+    const hideAlertError = () => {
         setError(false)
         setMessage("")
     }
@@ -26,7 +26,7 @@ const useAlert = () => {
         showAlertLoading,
         hideAlertLoading,
         showAlertError,
-        hideIsLoading,
+        hideAlertError,
         isLoading,
         error,
         message,
