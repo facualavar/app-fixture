@@ -6,7 +6,7 @@ const useStorage = () => {
     }
 
     const get = (key) => {
-        storage.getItem(key)
+        return storage.getItem(key)
     }
 
     return {set, get}
