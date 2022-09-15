@@ -11,7 +11,7 @@ const App = () => {
   const alertInitial = useAlert()
 
   return (
-    <Box backgroundColor="#640F21" width="100vw" height="100vh">
+    <Box backgroundColor="#640F21" width="100vw" height="100vh" overflowX="hidden">
       <alertContext.Provider value={alertInitial}>
         <ProvideAuth>
           <Router>
