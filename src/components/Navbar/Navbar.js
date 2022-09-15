@@ -8,16 +8,21 @@ const Nabvar = () => {
 
     return (
         <Box backgroundColor="#440A16" color="#fff">
-            <ul className="list-navbar">
             {auth.user ?
+            <ul className="list-navbar">
+                <li className="link-navbar">Hola {auth.user.name}!</li>
                 <NavLink to="/groups" className="link-navbar">
                     Log out
-                </NavLink> :
+                </NavLink>
+            </ul> :
+            <ul className="list-navbar">
                 <NavLink to="/login" className="link-navbar">
                     Log in
                 </NavLink>
-            }
-            </ul>
+                <NavLink to="/register" className="link-navbar">
+                    Register
+                </NavLink>
+            </ul>}
         </Box>
     )
 }

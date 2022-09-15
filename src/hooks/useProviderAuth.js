@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { login } from "../services/auth-service"
+import { login, register } from "../services/auth-service"
 import useStorage from "./useStorage";
 
 // Provider hook that creates auth object and handles state
@@ -22,9 +22,19 @@ const useProvideAuth = () => {
         return {data, error}
     }
 
-    const signup = (email, password) => {
-        console.log("register")
+    const signup = async ({name, email, password}) => {
+        const {data, error} = await register({name, email, password})
+
+        if (!error) {
+            storage.set('access_token', data.access_token)
+            setUser(data.user)
+
+            return {user, error}
+        }
+
+        return {data, error}
     }
+
     const signout = () => {
         console.log("logout")
     }

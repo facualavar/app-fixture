@@ -12,4 +12,16 @@ const login = async ({email, password}) => {
     return {data, error}
 }
 
-export {login}
+const register = async ({name, email, password}) => {
+    let data
+    let error = false
+
+    await apiFixture.post(`/register`, {name, email, password})
+        .then(
+            (response) => data = response.data,
+            (response) => error = response.response.data.message
+        )
+    return {data, error}
+}
+
+export {login, register}
