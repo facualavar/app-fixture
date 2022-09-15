@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Box from "../../components/Box/Box"
 import Button from "../../components/Button/Button"
 import FormComponent from "../../components/Form/Form"
@@ -10,6 +11,11 @@ import useAuth from "../../hooks/useAuth"
 const Login = () => {
     const auth = useAuth();
     const alert = useContext(alertContext);
+    const navigate = useNavigate()
+
+    if (auth.user) {
+        navigate('/')
+    }
 
     const validateLogin = (values) => {
         const errors = {}
