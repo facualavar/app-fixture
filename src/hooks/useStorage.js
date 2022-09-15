@@ -9,7 +9,11 @@ const useStorage = () => {
         return storage.getItem(key)
     }
 
-    return {set, get}
+    const remove = (key) => {
+        storage.removeItem(key)
+    }
+
+    return {set, get, remove}
 }
 
 export default useStorage

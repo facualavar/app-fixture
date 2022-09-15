@@ -36,7 +36,8 @@ const useProvideAuth = () => {
     }
 
     const signout = () => {
-        console.log("logout")
+        setUser(null)
+        storage.remove('access_token')
     }
     const sendPasswordResetEmail = (email) => {
         //

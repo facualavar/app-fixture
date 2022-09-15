@@ -11,7 +11,7 @@ const Nabvar = () => {
             {auth.user ?
             <ul className="list-navbar">
                 <li className="link-navbar">Hola {auth.user.name}!</li>
-                <NavLink to="/groups" className="link-navbar">
+                <NavLink to="/logout" className="link-navbar">
                     Log out
                 </NavLink>
             </ul> :
