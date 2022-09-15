@@ -1,7 +1,13 @@
 import apiFixture from "../api/fixture"
+import useStorage from "../hooks/useStorage"
 
 const GroupService = () =>{
     const versionApi = "/v1"
+    const storage = useStorage()
+
+    const token = storage.get("access_token")
+
+    apiFixture.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     async function fetchGroups() {
         let data
@@ -27,11 +33,11 @@ const GroupService = () =>{
         return {data, error}
     }
 
-    const fetchGames = async (id) => {
+    const fetchResults = async (id) => {
         let data
         let error = false
 
-        await apiFixture.get(`${versionApi}/groups/${id}/games`)
+        await apiFixture.get(`${versionApi}/groups/${id}/results`)
             .then(
                 (response) => data = response.data,
                 (response) => error = response.response.data.message
@@ -50,7 +56,7 @@ const GroupService = () =>{
         return {data, error}
     }
 
-    return {fetchGroups, fetchGroup, fetchGames, postResults}
+    return {fetchGroups, fetchGroup, fetchResults, postResults}
 }
 
 

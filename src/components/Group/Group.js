@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import alertContext from "../../contexts/alertContext"
+import useAuth from "../../hooks/useAuth"
 import GroupService from "../../services/group-service"
 import Box from "../Box/Box"
 import Button from "../Button/Button"
@@ -9,8 +10,14 @@ import TeamThumbnail from "../Teamthumbnail/TeamThumbnail"
 import "./group.css"
 
 const Group = ({id}) => {
+    const auth = useAuth();
     const groupService = GroupService()
     const alert = useContext(alertContext)
+    const navigate = useNavigate()
+
+    if (!auth.user) {
+        navigate('/login')
+    }
 
     const [group, setGroup] = useState({})
 
