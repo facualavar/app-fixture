@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const host = "http://localhost"
+const host = "https://git.heroku.com/fixture-api-rest.git"
 
 const apiFixture = axios.create({
     baseURL: host + "/api"
