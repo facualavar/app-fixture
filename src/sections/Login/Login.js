@@ -33,10 +33,11 @@ const Login = () => {
 
     const handleClickLogin = async (credentials) => {
         alert.showAlertLoading()
-        let {data, error} = await auth.signin(credentials)
+        let {response, error} = await auth.signin(credentials)
         alert.hideAlertLoading()
 
         if (!error) {
+            navigate('/')
             alert.hideAlertError()
         } else {
             alert.showAlertError(error)
@@ -55,7 +56,7 @@ const Login = () => {
                     <InputForm label="Email" type="text" name="email"/>
                     <InputForm label="Password" type="password" name="password"/>
                     <Box display="flex" justifyContent="center">
-                        <Button type="submit">Login</Button>
+                        <Button type="submit">Ingresar</Button>
                     </Box>
                 </FormComponent>
             </Box>
