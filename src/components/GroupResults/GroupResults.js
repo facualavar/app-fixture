@@ -30,35 +30,46 @@ const GroupResults = ({id}) => {
         getGroup()
     }, [id])
 
-    const initialValues = {
-        goals0: "",
-        goals1: "",
-        goals2: "",
-        goals3: "",
-        goals4: "",
-        goals5: "",
-        goals6: "",
-        goals7: "",
-        goals8: "",
-        goals9: "",
-        goals10: "",
-        goals11: "",
+    const initialValues = () => {
+        const values = {}
+
+        results.map((result) => {
+            let gameId = result.game_id
+
+            values[`${gameId}`] = {
+                goals_team_1: result.goals_team_1,
+                goals_team_2: result.goals_team_2,
+            }
+        })
+
+        return values
     }
 
     const validateGoals = (values) => {
         const errors = {}
-        const qtyTeams = 12;
 
-        for (let i = 0; i < qtyTeams; i++) {
-            if(values[`goals${i}`] < 0) errors[`goals${i}`] = "Invalid number"
-        }
+        results.map((result) => {
+            let gameId = result.game_id
+
+            if (values[`${gameId}`]["goals_team_1"] < 0) {
+                errors[`${gameId}`] = {
+                    goals_team_1: "Invalid number"
+                }
+            }
+
+            if (values[`${gameId}`]["goals_team_2"] < 0) {
+                errors[`${gameId}`] = {
+                    goals_team_2: "Invalid number"
+                }
+            }
+        })
 
         return errors
     }
 
-    const handleClickSaveResults = async (results) => {
-        let goals = Object.values(results)
-        let {data, error} = await groupService.postResults(id, goals)
+    const handleClickSaveResults = async (values) => {
+
+        let {data, error} = await groupService.postResults(id, values)
 
         if (!error) {
             alert.hideAlertError()
@@ -70,9 +81,10 @@ const GroupResults = ({id}) => {
 
     return (
         <Box className="container">
-            {Array.isArray(results) && results.length ?
+            {Array.isArray(results) && results.length > 0 ?
             <Form
-                initialValues={initialValues}
+                enableReinitialize={true}
+                initialValues={initialValues()}
                 validate={validateGoals}
                 onSubmit={handleClickSaveResults}
             >
@@ -82,7 +94,7 @@ const GroupResults = ({id}) => {
                             <Box key={index} marginBottom="20px">
                                 {(index % 2 == 0) ? <h3 className="title">{result.matchday}</h3> : null}
                                 <GameThumbnail
-                                    gameNumber={index}
+                                    gameId={result.game_id}
                                     iconTeam1={result.flag_team_1}
                                     nameTeam1={result.name_team_1}
                                     goalsTeam1={result.goals_team_1}
